@@ -5,7 +5,7 @@ var steamAccounts;
 
 $(document).ready(function () {
     $.ajax({
-        url: 'http://127.0.0.1:9000/bot',
+        url: '/get',
         type: 'GET',
         timeout: 10000,
         crossDomain: true,
@@ -97,7 +97,7 @@ function onClickListeners() {
                 '"market_key":"qwerqwerqwer","steam_key":"7DA08E6F8F674E9778DC5F9C04BB44AD"}';
 
         $.ajax({
-            url: 'http://127.0.0.1:9000/bot/add',
+            url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot/add',
             type: 'POST',
             timeout: 10000,
             crossDomain: true,

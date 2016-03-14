@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="adminpart:war exploded">
-    <output-path>$PROJECT_DIR$/target/adminpart</output-path>
+  <artifact type="exploded-war" build-on-make="true" name="adminpart">
+    <output-path>$PROJECT_DIR$/classes/artifacts/adminpart</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -34,9 +34,6 @@
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.6" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.12" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/adminpart/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="adminpart/web/Web" />
     </root>
