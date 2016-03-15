@@ -18,11 +18,10 @@
     <!-- MetisMenu CSS -->
     <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- DataTables CSS --> <!-- from tables style-->
-    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"
-          rel="stylesheet">
+    <!-- DataTables CSS --> <!-- for tables -->
+    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
-    <!-- DataTables Responsive CSS --> <!-- from tables style-->
+    <!-- DataTables Responsive CSS --> <!-- for tables -->
     <link href="/bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
 
     <!-- Timeline CSS -->
@@ -30,9 +29,10 @@
 
     <!-- Custom CSS -->
     <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/dist/css/load-animation.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="/bower_components/morrisjs/morris.min.js" rel="stylesheet">
+    <link href="/bower_components/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -122,7 +122,6 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div id="result"></div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-primary">
@@ -213,6 +212,17 @@
                 <!-- /.panel -->
             </div>
             <!-- /.col-lg-6 -->
+            <div class="col-lg-4 pull-right">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Статистика учетных запесей
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-donut-chart"></div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
         </div>
         <!-- /.row -->
     </div>
@@ -249,19 +259,24 @@
                 <!-- /.modal-body -->
                 <div class="modal-footer">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <button type="button" class="btn btn-outline btn-primary btn-block" id="update">
                                 update
                             </button>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <button type="button" class="btn btn-outline btn-primary btn-block" id="delete">
                                 delete
                             </button>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <button type="button" class="btn btn-outline btn-primary btn-block" id="start">
                                 start
+                            </button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button type="button" class="btn btn-outline btn-primary btn-block" id="stop">
+                                stop
                             </button>
                         </div>
                     </div>
@@ -279,7 +294,7 @@
 <!-- jQuery -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 
-<!-- BootstraaScript -->
+<!-- Bootstrap Core JavaScript -->
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- Metis MeJavaScript -->
@@ -289,19 +304,14 @@
 <script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
-<!-- Custom Tcript -->
+<!-- Morris Charts JavaScript -->
+<script src="/bower_components/raphael/raphael-min.js"></script>
+<script src="/bower_components/morrisjs/morris.js"></script>
+<script src="/js/morris-data.js"></script>
+
+<!-- Custom Theme JavaScript -->
 <script src="/dist/js/sb-admin-2.js"></script>
-
-<%--Load Animation--%>
-<link href="/dist/css/load-animation.css" rel="stylesheet" type="text/css">
-
-<!-- Page-Level Demo Scripts - Tables - Use for reference --> <!-- from tables-->
 <script src="/dist/js/sb-data-manager.js"></script>
 
-<!-- Morris Charts JavaScript for work with diagrams. Must be last -->
-<script src="/bower_components/raphael/raphael-min.js"></script>
-<script src="/bower_components/morrisjs/morris.min.js"></script>
-<script src="/js/morris-data.js"></script>
-<!-- /script block-->
 </body>
 </html>

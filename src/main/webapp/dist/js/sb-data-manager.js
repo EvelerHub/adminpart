@@ -2,23 +2,25 @@
  * Created by Alexander Eveler on 13.03.2016.
  */
 var steamAccounts;
+var table;
+var currentSteamAccount;
 
 $(document).ready(function () {
     $.ajax({
-        url: '/get',
+        url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot',
         type: 'GET',
         timeout: 10000,
         crossDomain: true,
         dataType: "json",
         contentType: "application/json; charset=UTF-8",
         beforeSend: function () {
-            // should be some animation
+            // TODO: should be some animation
             table = $('#steam-table').html();
             var animationDiv = '<div class="bar"></div>';
             $('#steam-table').html(animationDiv);
         },
         error: function () {
-            // should be some error listener
+            // TODO: should be some error listener
         },
         success: addParentToTable
     });
@@ -36,20 +38,25 @@ function addParentToTable(data) {
 
         switch (data[i].status) {
             case 'starting' :
-                clazz = "warning";
+                clazz = 'warning ';
                 break;
             case 'error' :
-                clazz = "danger";
+                clazz = 'danger ';
+                break;
+            case 'stopped' :
+                clazz = 'danger ';
                 break;
             case 'started' :
-                clazz = "success";
+                clazz = 'success ';
                 break;
             case 'startproceed' :
-                clazz = "warning";
+                clazz = 'warning ';
                 break;
+            default :
+                clazz = '';
         }
 
-        var tableRow = '<tr class="' + clazz + ' clickable-row">' +
+        var tableRow = '<tr class="' + clazz + 'clickable-row">' +
             '<td class="id">' + data[i].id + '</td>' +
             '<td>' + data[i].login + '</td>' +
             '<td>' + data[i].dateAdded + '</td>' +
@@ -72,11 +79,12 @@ function updateTable() {
 function onClickListeners() {
     $(".clickable-row").click(function () {
         var id = $(this).find('.id').html();
-        var steamAccount = steamAccounts[id];
-        var fields = '<tr><td>Login:</td><td id="login">' + steamAccount.login + '</td></tr>' +
-            '<tr><td>Password:</td><td id="login">' + steamAccount.pass + '</td></tr>' +
-            '<tr><td>Steam key:</td><td id="login">' + steamAccount.steamKey + '</td></tr>' +
-            '<tr><td>Market key:</td><td id="login">' + steamAccount.dota2marketKey + '</td></tr>' +
+        currentSteamAccount = steamAccounts[id];
+
+        var fields = '<tr><td>Login:</td><td id="login">' + currentSteamAccount.login + '</td></tr>' +
+            '<tr><td>Password:</td><td id="pass">' + currentSteamAccount.pass + '</td></tr>' +
+            '<tr><td>Steam key:</td><td id="steam-key">' + currentSteamAccount.steamKey + '</td></tr>' +
+            '<tr><td>Market key:</td><td id="market-key">' + currentSteamAccount.dota2marketKey + '</td></tr>' +
             '<tr><td></td><td></td></tr>'; // for underline
 
         var inputFields = $('#data-input-fields').html();
@@ -87,31 +95,183 @@ function onClickListeners() {
         $('#modal').modal();
     });
 
-    $('#delete').click(function(){
-        console.log((confirm('вы подтверждаеье удаление учетной записи steam?')));
+    $('#delete').click(function () {
+        if (confirm('вы подтверждаеье удаление учетной записи steam?')) {
+            $.ajax({
+                url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot/delete',
+                type: 'POST',
+                timeout: 10000,
+                crossDomain: true,
+                dataType: "json",
+                data: JSON.stringify(currentSteamAccount),
+                contentType: "application/json; charset=UTF-8",
+                beforeSend: function () {
+                    // TODO: should be some on before listener
+                },
+                error: function () {
+                    // TODO: should be some on error listener
+                },
+                success: function () {
+                    $('#modal').modal('hide');
+                    // TODO: should be some on success listener
+                }
+            })
+        }
     });
 
-    $('#add-and-start').click(function(){
-        console.log('start');
-        var a = '{"name":"reveller3","login":"alexander_eveler2","pass":"VivaForever",'+
-                '"market_key":"qwerqwerqwer","steam_key":"7DA08E6F8F674E9778DC5F9C04BB44AD"}';
+    $('#update').click(function () {
+        var steamAccount = parseData($('#modal-data-input-fields'));
+        steamAccount.status = "new";
+        var updateObject = {};
+        updateObject.name = currentSteamAccount.login;
+
+        if (steamAccount.name) {
+            updateObject.name = steamAccount.login;
+        }
+
+        updateObject.update = steamAccount;
+        console.log(JSON.stringify(updateObject));
+
+        if (confirm('Вы подтверждаеье обновить учетную запись steam?')) {
+            update(updateObject);
+        }
+    });
+
+    $('#start').click(function () {
+        var startObject = {};
+        startObject.name = currentSteamAccount.login;
+        console.log(JSON.stringify(startObject));
+
+        start(startObject);
+    });
+
+    $('#stop').click(function () {
+        var stopObject = {};
+        stopObject.name = currentSteamAccount.login;
+        console.log(JSON.stringify(stopObject));
 
         $.ajax({
-            url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot/add',
+            url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot/stop',
             type: 'POST',
             timeout: 10000,
             crossDomain: true,
             dataType: "json",
-            data: a,
+            data: JSON.stringify(stopObject),
             contentType: "application/json; charset=UTF-8",
             beforeSend: function () {
-                console.log('before');
+                // TODO: should be some on before listener
             },
             error: function () {
-                // should be some error listener
+                // TODO: should be some on error listener
             },
-            success: addParentToTable
-        });
-        console.log('finish');
+            success: function () {
+                // TODO: should be some on success listener
+            }
+        })
     });
+
+    $('#add-and-start').click(function () {
+        var steamAccount = parseData($('#data-input-fields'));
+        steamAccount.name = steamAccount.login;
+        console.log(JSON.stringify(steamAccount));
+        add(steamAccount);
+
+        var updateObject = {};
+        steamAccount.status = "new";
+        updateObject.name = steamAccount.name;
+        updateObject.update = steamAccount;
+
+        update(updateObject);
+
+        var startObject = {};
+        startObject.name = steamAccount.name;
+        start(startObject);
+    });
+}
+
+function start(startObject) {
+    $.ajax({
+        url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot/start',
+        type: 'POST',
+        timeout: 10000,
+        crossDomain: true,
+        dataType: "json",
+        data: JSON.stringify(startObject),
+        contentType: "application/json; charset=UTF-8",
+        beforeSend: function () {
+            // TODO: should be some on before listener
+        },
+        error: function () {
+            // TODO: should be some on error listener
+        },
+        success: function () {
+            // TODO: should be some on success listener
+        }
+    })
+}
+
+function update(updateObject) {
+
+    $.ajax({
+        url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot/update',
+        type: 'POST',
+        timeout: 10000,
+        crossDomain: true,
+        dataType: "json",
+        data: JSON.stringify(updateObject),
+        contentType: "application/json; charset=UTF-8",
+        beforeSend: function () {
+            // TODO: should be some on before listener
+        },
+        error: function () {
+            // TODO: should be some on error listener
+        },
+        success: function () {
+            // TODO: should be some on success listener
+        }
+    })
+}
+
+function add(steamAccount) {
+    $.ajax({
+        url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot/add',
+        type: 'POST',
+        timeout: 10000,
+        crossDomain: true,
+        dataType: "json",
+        data: JSON.stringify(steamAccount),
+        contentType: "application/json; charset=UTF-8",
+        beforeSend: function () {
+            // TODO: should be some on before listener
+        },
+        error: function () {
+            // TODO: should be some on error listener
+        },
+        success: function () {
+            // TODO: should be some on success listener
+        }
+    });
+}
+
+function parseData(fields) {
+    var inputFields = fields.find("input");
+    var steamAccount = {};
+
+    var login = $(inputFields.get(0)).val();
+    var pass = $(inputFields.get(1)).val();
+    var steamKey = $(inputFields.get(2)).val();
+    var marketKey = $(inputFields.get(3)).val();
+    var twoFactorCode = $(inputFields.get(4)).val();
+
+    if (login) steamAccount.login = login;
+
+    if (pass) steamAccount.pass = pass;
+
+    if (steamKey) steamAccount.steam_key = steamKey;
+
+    if (marketKey) steamAccount.market_key = marketKey;
+
+    if (twoFactorCode) steamAccount.authCode = twoFactorCode;
+
+    return steamAccount;
 }
