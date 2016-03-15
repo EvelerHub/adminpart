@@ -3,20 +3,20 @@ $(function() {
     Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
-            label: "new",
+            label: "started",
             value: 12
         }, {
-            label: "started",
+            label: "other",
             value: 30
         }, {
-            label: "other",
+            label: "new",
             value: 20
         }],
         resize: true,
         colors: [
-            'red',
-            'green',
-            'grey'
+            '#54CF22',
+            '#CD2626',
+            '#A8A1A1'
         ]
     });
 

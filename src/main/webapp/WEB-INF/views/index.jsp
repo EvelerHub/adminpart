@@ -120,6 +120,7 @@
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
+                        <i class="fa fa-plus-square fa-fw"></i>
                         Добавить новую учетную запись
                     </div>
                     <!-- /.panel-heading -->
@@ -162,7 +163,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-4 pull-right">
-                                <button type="submit" class="btn btn-outline btn-primary btn-block" id="add-and-start">
+                                <button class="btn btn-outline btn-primary btn-block" id="add-and-start">
                                     add & start
                                 </button>
                             </div>
@@ -176,7 +177,7 @@
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Статистика учетных запесей
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Статистика состояния
                     </div>
                     <div class="panel-body">
                         <div id="morris-donut-chart" style="max-height: 279px;"></div>
@@ -190,7 +191,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Таблица состояния учетных записей
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Таблица состояния учетных записей
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -301,7 +302,6 @@
 <!-- Morris Charts JavaScript -->
 <script src="/bower_components/raphael/raphael-min.js"></script>
 <script src="/bower_components/morrisjs/morris.js"></script>
-<script src="/js/morris-data.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="/dist/js/sb-admin-2.js"></script>

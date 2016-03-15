@@ -5,6 +5,10 @@ var steamAccounts;
 var table;
 var currentSteamAccount;
 
+var newSteamAccounts = 0;
+var startedSteamAccounts = 0;
+var otherSteamAccounts = 0;
+
 $(document).ready(function () {
     $.ajax({
         url: 'http://ec2-52-35-187-114.us-west-2.compute.amazonaws.com:9000/bot',
@@ -18,19 +22,21 @@ $(document).ready(function () {
             table = $('#steam-table').html();
             var animationDiv = '<div class="bar"></div>';
             $('#steam-table').html(animationDiv);
+            $('#morris-donut-chart').html(animationDiv);
         },
         error: function () {
             // TODO: should be some error listener
         },
-        success: addParentToTable
+        success: addParentOnPage
     });
 });
 
-function addParentToTable(data) {
+function addParentOnPage(data) {
     $("#steam-table").html(table);
     console.log(data.length);
 
     steamAccounts = data;
+
 
     for (var i = 0; i < data.length; i++) {
         data[i].id = i;
@@ -39,20 +45,29 @@ function addParentToTable(data) {
         switch (data[i].status) {
             case 'starting' :
                 clazz = 'warning ';
+                otherSteamAccounts++;
                 break;
             case 'error' :
                 clazz = 'danger ';
+                otherSteamAccounts++;
                 break;
             case 'stopped' :
                 clazz = 'danger ';
+                otherSteamAccounts++;
                 break;
             case 'started' :
                 clazz = 'success ';
+                startedSteamAccounts++;
                 break;
             case 'startproceed' :
                 clazz = 'warning ';
+                otherSteamAccounts++;
+                break;
+            case 'new' :
+                newSteamAccounts++;
                 break;
             default :
+                otherSteamAccounts++;
                 clazz = '';
         }
 
@@ -64,10 +79,34 @@ function addParentToTable(data) {
             '<td>' + data[i].status + '</td>' +
             '</tr>';
         $('#steam-table-body').append(tableRow);
+        $('#morris-donut-chart').html('');
     }
 
     updateTable();
+    setDiagram();
     onClickListeners();
+}
+
+function setDiagram(){
+    Morris.Donut({
+        element: 'morris-donut-chart',
+        data: [{
+            label: "started",
+            value: startedSteamAccounts
+        }, {
+            label: "other",
+            value: otherSteamAccounts
+        }, {
+            label: "new",
+            value: newSteamAccounts
+        }],
+        resize: true,
+        colors: [
+            '#54CF22',
+            '#CD2626',
+            '#A8A1A1'
+        ]
+    });
 }
 
 function updateTable() {
