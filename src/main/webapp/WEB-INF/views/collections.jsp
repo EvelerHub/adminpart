@@ -1,7 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Eveler
+  Date: 16.03.2016
+  Time: 22:25
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 
     <meta charset="utf-8">
@@ -10,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin</title>
+    <title>Sets</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,132 +53,12 @@
 <body>
 <div id="wrapper">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="steam.html">Admin page loot-pro</a>
-        </div>
-        <!-- /.navbar-header -->
-        <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-user fa-fw"></i>
-                            User Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-gear fa-fw"></i>
-                            Settings
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="login.html">
-                            <i class="fa fa-sign-out fa-fw"></i>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
-        <!-- /.navbar-top-links -->
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="steam.html" class="active">
-                            <i class="fa fa-steam-square fa-fw"></i>
-                            Учетные записи Steam
-                        </a>
-                    </li>
-                    <li>
-                        <a href="another.html">
-                            <i class="fa fa-steam-square fa-fw"></i>
-                            Маркет CS-GO
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-    </nav>
+    <%@ include file="/WEB-INF/views/fragments/navbar.jspf" %>
 
     <div id="page-wrapper">
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <i class="fa fa-plus-square fa-fw"></i>
-                        Добавить новую учетную запись
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div id="data-input-fields">
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon min-width-addons">
-                                            <i class="fa fa-user"></i>
-                                        </span>
-                                        <input class="form-control" placeholder="login">
-                                    </div>
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon min-width-addons">
-                                            <i class="fa fa-lock"></i>
-                                        </span>
-                                        <input class="form-control" placeholder="password">
-                                    </div>
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon min-width-addons">
-                                            <i class="fa fa-steam"></i>
-                                        </span>
-                                        <input class="form-control" placeholder="steam key">
-                                    </div>
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon min-width-addons">
-                                            <i class="fa fa-truck"></i>
-                                        </span>
-                                        <input class="form-control" placeholder="market key">
-                                    </div>
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon min-width-addons">
-                                            <i class="fa fa-lock"></i>
-                                        </span>
-                                        <input class="form-control" placeholder="two factor code">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 pull-right">
-                                <button class="btn btn-outline btn-primary btn-block" id="add-and-start">
-                                    add & start
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <i class="fa fa-bar-chart-o fa-fw"></i> Статистика состояния
@@ -200,9 +84,9 @@
                                 <thead>
                                 <tr>
                                     <th>id</th>
-                                    <th>login</th>
-                                    <th>date added</th>
-                                    <th>update status date</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>category</th>
                                     <th>status</th>
                                 </tr>
                                 </thead>
@@ -304,8 +188,8 @@
 <script src="/bower_components/morrisjs/morris.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/dist/js/sb-admin-2.js"></script>
-<script src="/dist/js/sb-data-manager.js"></script>
+<script src="/dist/js/sb-admin.js"></script>
+<script src="/dist/js/sb-steam-data-manager.js"></script>
 
 </body>
 </html>

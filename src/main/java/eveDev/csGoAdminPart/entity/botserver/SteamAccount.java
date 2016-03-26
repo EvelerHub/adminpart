@@ -1,24 +1,39 @@
-package eveDev.csGoAdminPart.entity;
+package evedev.csgoadminpart.entity.botserver;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
- * Created by Alexander Eveler on 13.03.2016.
+ * Entity for SteamAccount table from bot server. <br/>
+ *
+ * @author Alexander Eveler
  */
-@Entity
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SteamAccount implements Serializable {
 
     private static final long serialVersionUID = 1718619513645258261L;
 
-    private long id;
+    @JsonProperty("login")
     private String login;
+
+    @JsonProperty("pass")
     private String password;
+
+    @JsonProperty("market_key")
     private String marketKey;
+
+    @JsonProperty("steam_key")
     private String steamKey;
+
+    @JsonProperty("dateAdded")
     private String dateAdded;
+
+    @JsonProperty("updateDate")
     private String updateDate;
+
+    @JsonProperty("status")
     private String status;
 
     public SteamAccount() {
@@ -31,7 +46,7 @@ public class SteamAccount implements Serializable {
      * Too many parameters.<br/>
      * Here should be <em>builder pattern</em>.<br/>
      *
-     * @param id is name for database in <em> CsGoBot server </em>
+//     * @param id is name for database in <em> CsGoBot server </em>
      * @param login is <em> Steam account </em> username
      * @param password is <em> Steam account </em> password
      * @param marketKey is developer key of <a href="https://csgo.tm/"> marketplace </a>
@@ -40,9 +55,8 @@ public class SteamAccount implements Serializable {
      * @param updateDate is date of last status updating by <em> CsGoBot server <em>
      * @param status is one of <em> Steam account  </em> condition into <em> CsGoBot server </em>
      */
-    public SteamAccount(long id, String login, String password, String marketKey,
+    public SteamAccount(String login, String password, String marketKey,
                         String steamKey, String dateAdded, String updateDate, String status) {
-        this.id = id;
         this.login = login;
         this.password = password;
         this.marketKey = marketKey;
@@ -50,14 +64,6 @@ public class SteamAccount implements Serializable {
         this.dateAdded = dateAdded;
         this.updateDate = updateDate;
         this.status = status;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getLogin() {
@@ -119,7 +125,6 @@ public class SteamAccount implements Serializable {
     @Override
     public String toString() {
         return "SteamAccount{" +
-                "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", marketKey='" + marketKey + '\'' +
