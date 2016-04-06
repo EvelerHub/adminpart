@@ -20,7 +20,7 @@ public class Item implements Serializable {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "Id", length = 20, nullable = false)
+    @Column(name = "id", length = 20, nullable = false)
     private long id;
 
     @Column(name = "image_path", length = 1024, nullable = false, columnDefinition = "varchar(1024) default ''")

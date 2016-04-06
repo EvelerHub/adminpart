@@ -8,10 +8,7 @@ import evedev.csgoadminpart.repository.dao.CollectionRepository;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ import java.util.List;
 @RequestMapping("/category/{categoryID}")
 public class CategoryController {
 
-    public static final Logger logger = Logger.getLogger(CollectionController.class);
+    public static final Logger logger = Logger.getLogger(CollectionsController.class);
 
     @Autowired
     CategoryRepository categoryRepository;
@@ -47,16 +44,61 @@ public class CategoryController {
         return "notfound";
     }
 
-    @RequestMapping(value = "/getCollections", method = RequestMethod.POST)
-    public @ResponseBody List<Collection> getCollections(@PathVariable int categoryID) {
-        List<Collection> collections = null;
+    @ResponseBody
+    @RequestMapping(value = "/getAll", method = RequestMethod.POST)
+    public List<Collection> getCollections(@PathVariable long categoryID) {
+        List<Collection> collections;
         try {
             collections = collectionRepository.getByCategoryId(categoryID);
             System.out.println(collections);
         } catch (RecordNotFoundException e) {
-            e.printStackTrace();
+            return null;
         }
 
         return collections;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Collection addCollection(@RequestBody Collection collection, @PathVariable long categoryID) {
+        Collection addedCollection;
+        try {
+            collection.setCategory(categoryRepository.getById(categoryID));
+            addedCollection = collectionRepository.add(collection);
+            System.out.println(addedCollection);
+        } catch (RecordNotFoundException e) {
+            return null;
+        }
+
+        return addedCollection;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Collection updateCollection(@RequestBody Collection collection, @PathVariable long categoryID) {
+        Collection updatedCollection;
+        try {
+            collection.setCategory(categoryRepository.getById(categoryID));
+            updatedCollection = collectionRepository.update(collection);
+            System.out.println(updatedCollection);
+        } catch (RecordNotFoundException e) {
+            return null;
+        }
+
+        return updatedCollection;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Collection deleteCollection(@RequestBody Collection collection, @PathVariable long categoryID) {
+        try {
+            collection.setCategory(categoryRepository.getById(categoryID));
+            collectionRepository.remove(collection);
+            System.out.println("remove ==>" + collection);
+        } catch (RecordNotFoundException e) {
+            return null;
+        }
+
+        return collection;
     }
 }

@@ -24,7 +24,7 @@ public class Collection implements Serializable {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "Id", length = 20, nullable = false)
+    @Column(name = "id", length = 20, nullable = false)
     private long id;
 
     @Column(name = "name", length = 1024, nullable = false, columnDefinition = "varchar(255) default ''")

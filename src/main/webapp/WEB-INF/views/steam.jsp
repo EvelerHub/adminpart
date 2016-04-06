@@ -1,145 +1,195 @@
 <%--
   Created by IntelliJ IDEA.
   User: Eveler
-  Date: 16.03.2016
-  Time: 22:25
+  Date: 02.04.2016
+  Time: 7:48
 --%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Steam</title>
+    <title>Gentallela Alela! | </title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
 
-    <!-- MetisMenu CSS -->
-    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- DataTables CSS --> <!-- for tables -->
-    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
 
-    <!-- DataTables Responsive CSS --> <!-- for tables -->
-    <link href="/bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
-    <!-- Timeline CSS -->
-    <link href="/dist/css/timeline.css" rel="stylesheet">
+    <!-- Custom styling plus plugins -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/maps/jquery-jvectormap-2.0.3.css"/>
+    <link href="css/icheck/flat/green.css" rel="stylesheet"/>
+    <link href="css/floatexamples.css" rel="stylesheet" type="text/css"/>
+    <link href="css/load-animation.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
-    <link href="/dist/css/load-animation.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/nprogress.js"></script>
 
-    <!-- Morris Charts CSS -->
-    <link href="/bower_components/morrisjs/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="../assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
-<body>
-<div id="wrapper">
 
-    <%@ include file="/WEB-INF/views/fragments/navbar.jspf" %>
+<body class="nav-md">
 
-    <div id="page-wrapper">
-        <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <i class="fa fa-plus-square fa-fw"></i>
-                        Добавить новую учетную запись
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div id="data-input-fields">
-                                    <div class="form-group input-group">
+<div class="container body">
+
+    <div class="main_container">
+
+        <%@include file="fragments/leftcol.jspf"%>
+
+        <!-- top navigation -->
+        <%@include file="fragments/navbar.jspf"%>
+        <!-- /top navigation -->
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                            <h2>Добавить новую учетную запись</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="data-input-fields">
+                                        <div class="form-group input-group">
                                         <span class="input-group-addon min-width-addons">
                                             <i class="fa fa-user"></i>
                                         </span>
-                                        <input class="form-control" placeholder="login">
-                                    </div>
-                                    <div class="form-group input-group">
+                                            <input class="form-control" placeholder="login">
+                                        </div>
+                                        <div class="form-group input-group">
                                         <span class="input-group-addon min-width-addons">
                                             <i class="fa fa-lock"></i>
                                         </span>
-                                        <input class="form-control" placeholder="password">
-                                    </div>
-                                    <div class="form-group input-group">
+                                            <input class="form-control" placeholder="password">
+                                        </div>
+                                        <div class="form-group input-group">
                                         <span class="input-group-addon min-width-addons">
                                             <i class="fa fa-steam"></i>
                                         </span>
-                                        <input class="form-control" placeholder="steam key">
-                                    </div>
-                                    <div class="form-group input-group">
+                                            <input class="form-control" placeholder="steam key">
+                                        </div>
+                                        <div class="form-group input-group">
                                         <span class="input-group-addon min-width-addons">
                                             <i class="fa fa-truck"></i>
                                         </span>
-                                        <input class="form-control" placeholder="market key">
-                                    </div>
-                                    <div class="form-group input-group">
+                                            <input class="form-control" placeholder="market key">
+                                        </div>
+                                        <div class="form-group input-group">
                                         <span class="input-group-addon min-width-addons">
                                             <i class="fa fa-lock"></i>
                                         </span>
-                                        <input class="form-control" placeholder="two factor code">
+                                            <input class="form-control" placeholder="two factor code">
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 pull-right">
+                                    <button class="btn btn-outline btn-primary btn-block" id="add-and-start">
+                                        add &amp; start
+                                    </button>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 pull-right">
-                                <button class="btn btn-outline btn-primary btn-block" id="add-and-start">
-                                    add & start
-                                </button>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel tile overflow_hidden">
+                        <div class="x_title">
+                            <h2>Статистика состояния</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row" id="status-panel">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div id="morris-donut-chart" style="max-height: 261px;"></div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <table class="tile_info" id="status-window">
+                                        <thead>
+                                        <tr>
+                                            <th>status</th>
+                                            <th>persent</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="status-legend">
+                                            <%--should be rows--%>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Статистика состояния
-                    </div>
-                    <div class="panel-body">
-                        <div id="morris-donut-chart" style="max-height: 279px;"></div>
-                    </div>
-                    <!-- /.panel-body -->
                 </div>
             </div>
-        </div>
-        <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Таблица состояния учетных записей
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="steam-table">
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                            <h2>Таблица состояния учетных записей</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <table class="table table-striped table-bordered" id="steam-table">
                                 <thead>
                                 <tr>
                                     <th>id</th>
@@ -153,19 +203,25 @@
                                 <%-- would be some rows --%>
                                 </tbody>
                             </table>
+                            <!-- /.table-responsive -->
                         </div>
-                        <!-- /.table-responsive -->
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /#page-wrapper -->
 
+            <!-- footer content -->
+            <footer>
+                <div class="copyright-info">
+                    <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+        <!-- /page content -->
+
+    </div>
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -227,28 +283,51 @@
     </div>
     <!-- /.modal -->
 </div>
-<!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+</div>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
-<!-- Metis MeJavaScript -->
-<script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- bootstrap progress js -->
+<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
+<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
 
-<!-- DataTablipt --> <!-- from tables-->
-<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Datatables-->
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="js/datatables/dataTables.bootstrap.js"></script>
+<script src="js/datatables/dataTables.buttons.min.js"></script>
+<script src="js/datatables/buttons.bootstrap.min.js"></script>
+<script src="js/datatables/jszip.min.js"></script>
+<script src="js/datatables/pdfmake.min.js"></script>
+<script src="js/datatables/vfs_fonts.js"></script>
+<script src="js/datatables/buttons.html5.min.js"></script>
+<script src="js/datatables/buttons.print.min.js"></script>
+<script src="js/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="js/datatables/dataTables.keyTable.min.js"></script>
+<script src="js/datatables/dataTables.responsive.min.js"></script>
+<script src="js/datatables/responsive.bootstrap.min.js"></script>
+<script src="js/datatables/dataTables.scroller.min.js"></script>
 
-<!-- Morris Charts JavaScript -->
-<script src="/bower_components/raphael/raphael-min.js"></script>
-<script src="/bower_components/morrisjs/morris.js"></script>
+<!-- pace -->
+<script src="js/pace/pace.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="/dist/js/sb-admin.js"></script>
-<script src="/dist/js/sb-steam-data-manager.js"></script>
+<!-- moris js -->
+<script src="js/moris/raphael-min.js"></script>
+<script src="js/moris/morris.min.js"></script>
 
+<script src="js/custom.js"></script>
+<script src="js/sb-steam-data-manager.js"></script>
+
+
+<script>
+    NProgress.done();
+</script>
 </body>
+
 </html>
+

@@ -81,7 +81,7 @@ public class CollectionRepositoryImpl implements CollectionRepository {
     @Override
     @Transactional
     public void remove(Collection collection) throws RecordNotFoundException {
-        entityManager.remove(collection);
+        entityManager.remove(entityManager.contains(collection) ? collection : entityManager.merge(collection));
         entityManager.close();
     }
 }
